@@ -1,0 +1,21 @@
+version: '3.7'
+services: 
+  etcd:
+    image: bitnami/etcd
+    container_name: etcd-dev
+    networks: 
+      dev_net:
+        ipv4_address: 172.20.0.20
+    ports: 
+      - 2379:2379
+      - 2380:2380
+    environment: 
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+      - ALLOW_NONE_AUTHENTICATION=yes
+      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-server:2379
+    restart: always
+
+networks: 
+  dev_net:
+    external: true

@@ -1,0 +1,22 @@
+version: '3.7'
+services: 
+  redis:
+    image: redis
+    container_name: redis-dev
+    # command: redis-server /etc/redis.conf
+    environment: 
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+    networks: 
+      dev_net:
+        ipv4_address: 172.20.0.10
+    ports: 
+      - 6379:6379
+    privileged: true
+    restart: always
+    # volumes: 
+    #   - './redis.conf:/etcd/redis.conf'
+
+networks: 
+  dev_net:
+    external: true

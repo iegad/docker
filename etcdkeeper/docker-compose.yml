@@ -1,0 +1,36 @@
+version: '3.7'
+services: 
+  etcd:
+    image: bitnami/etcd
+    container_name: etcd-dev
+    networks: 
+      dev_net:
+        ipv4_address: 172.20.0.2
+    ports: 
+      - 2379:2379
+      - 2380:2380
+    environment: 
+      - SET_CONTAINER_TIMEZONE=true
+      - CONTAINER_TIMEZONE=Asia/Shanghai
+    volumes:
+      - ./data:/etcd-data
+    command: 
+      - "/usr/local/bin/etcd"
+      - "--name"
+      - "s1"
+      - "--data-dir"
+      - "/etcd-data"
+      - "--advertise-client-urls"
+      - "http://0.0.0.0:2379"
+      - --listen-client-urls
+      - "http://0.0.0.0:2379"
+      - "--initial-advertise-peer-urls"
+      - "http://0.0.0.0:2380"
+      - "--listen-peer-urls"
+      - "http://0.0.0.0:2380"
+      - "--initial-cluster-token"
+      - "tkn"
+      - "--initial-cluster"
+      - "s1=http://0.0.0.0:2380"
+      - "--initial-cluster-state"
+      - "new"
