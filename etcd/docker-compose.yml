@@ -6,6 +6,7 @@ services:
     networks: 
       dev_net:
         ipv4_address: 172.20.0.20
+    privileged: true
     ports: 
       - 2379:2379
       - 2380:2380
