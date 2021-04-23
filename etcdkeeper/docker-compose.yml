@@ -1,19 +1,18 @@
 version: '3.7'
-services: 
+services:
   etcdkeeper:
-    image: evildecay/etcdkeeper
-    container_name: etcdkeeper-dev
+    image: evildecay/etcdkeeper:latest
+    container_name: dev_etcdkeeper
     privileged: true
     restart: always
-    networks: 
+    environment:
+      HOST: 0.0.0.0
+    networks:
       dev_net:
-        ipv4_address: 172.20.0.3
-    ports: 
-      - 8000:8080
-    environment: 
-      - SET_CONTAINER_TIMEZONE=true
-      - CONTAINER_TIMEZONE=Asia/Shanghai
+        ipv4_address: '172.30.1.11'
+    ports:
+      - 8800:8080
 
-networks: 
+networks:
   dev_net:
     external: true

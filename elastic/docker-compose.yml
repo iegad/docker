@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  elastic:
+    image: elasticsearch:7.11.2
+    container_name: elastic-dev
+    restart: always
+    networks: 
+      dev_net:
+        ipv4_address: '172.30.1.100'
+    ports: 
+      - 9200:9200
+      - 9300:9300
+    privileged: true
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+    volumes: 
+      - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+      - ./data:/usr/share/elasticsearch/data
+      - /etc/localtime:/etc/localtime:ro
+
+networks:
+  dev_net:
+    external: true

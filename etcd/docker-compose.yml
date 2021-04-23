@@ -1,22 +1,31 @@
 version: '3.7'
-services: 
+services:
   etcd:
+    container_name: etcd-dev-node1
     image: bitnami/etcd
-    container_name: etcd-dev
-    networks: 
+    restart: always
+    networks:
       dev_net:
-        ipv4_address: 172.20.0.20
-    privileged: true
-    ports: 
+        ipv4_address: '172.30.1.10'
+    ports:
       - 2379:2379
       - 2380:2380
-    environment: 
-      - SET_CONTAINER_TIMEZONE=true
-      - CONTAINER_TIMEZONE=Asia/Shanghai
-      - ALLOW_NONE_AUTHENTICATION=yes
-      - ETCD_ADVERTISE_CLIENT_URLS=http://etcd-server:2379
-    restart: always
+      - 4001:4001
+      - 7001:7001
+    privileged: true
+    volumes:
+      - ./data:/opt/bitnami/etcd/data
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - "ETCD_ADVERTISE_CLIENT_URLS=http://etcd:2379"
+      - "ETCD_LISTEN_CLIENT_URLS=http://0.0.0.0:2379"
+      - "ETCD_LISTEN_PEER_URLS=http://0.0.0.0:2380"
+      - "ETCD_INITIAL_ADVERTISE_PEER_URLS=http://0.0.0.0:2380"
+      - "ALLOW_NONE_AUTHENTICATION=yes"
+      - "ETCD_INITIAL_CLUSTER=node1=http://0.0.0.0:2380"
+      - "ETCD_NAME=node1"
+      - "ETCD_DATA_DIR=/opt/bitnami/etcd/data"
 
-networks: 
+networks:
   dev_net:
     external: true
