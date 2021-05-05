@@ -6,7 +6,7 @@ services:
     container_name: portainer-dev
     networks:
       dev_net:
-        ipv4_address: '172.30.1.2'
+        ipv4_address: '172.20.0.100'
     ports: 
       - "9000:9000"
     privileged: true

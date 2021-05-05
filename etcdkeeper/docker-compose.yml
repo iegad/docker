@@ -9,7 +9,7 @@ services:
       HOST: 0.0.0.0
     networks:
       dev_net:
-        ipv4_address: '172.30.1.11'
+        ipv4_address: 172.20.1.11
     ports:
       - 8800:8080
 

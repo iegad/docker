@@ -6,7 +6,7 @@ services:
     restart: always
     networks: 
       dev_net:
-        ipv4_address: '172.30.1.100'
+        ipv4_address: 172.20.3.200
     ports: 
       - 9200:9200
       - 9300:9300

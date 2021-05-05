@@ -6,9 +6,9 @@ services:
     restart: always
     networks:
       dev_net:
-        ipv4_address: '172.30.1.110'
+        ipv4_address: 172.20.3.100
     ports: 
-      - "27017:27017"
+      - 27017:27017
     privileged: true
     volumes:
       - ./data:/data
